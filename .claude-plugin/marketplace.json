@@ -6,23 +6,33 @@
     "name": "Numman Ali",
     "email": "numman.ali@gmail.com"
   },
-  "metadata": {
-    "version": "1.0.0",
-    "repository": "https://github.com/numman-ali/n-skills"
-  },
   "plugins": [
     {
       "name": "zai-cli",
-      "description": "Z.AI vision, search, reader, and GitHub repo tools via zai-cli",
+      "description": "Z.AI vision, search, reader, and GitHub exploration via MCP",
       "source": "./skills/tools/zai-cli",
-      "skills": ["./skills/tools/zai-cli"],
+      "skills": [
+        "./skills/tools/zai-cli"
+      ],
+      "strict": false
+    },
+    {
+      "name": "dev-browser",
+      "description": "Browser automation with persistent page state. Use when users ask to navigate websites, fill forms, take screenshots, extract web data, test web apps, or automate browser workflows.",
+      "source": "./skills/automation/dev-browser",
+      "skills": [
+        "./skills/automation/dev-browser"
+      ],
       "strict": false,
-      "category": "tools",
-      "author": {
-        "name": "Numman Ali",
-        "github": "numman-ali"
-      },
-      "keywords": ["vision", "search", "web", "github", "mcp", "z.ai"]
+      "upstream": {
+        "repo": "SawyerHood/dev-browser",
+        "path": "skills/dev-browser"
+      }
     }
-  ]
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "generated_at": "2026-01-02T15:54:18.634Z",
+    "skill_count": 2
+  }
 }

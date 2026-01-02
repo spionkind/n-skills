@@ -1,15 +1,60 @@
 # Contributing to n-skills
 
-This is a curated marketplace. All submissions are reviewed for quality.
+This is a **curated marketplace**. All submissions are reviewed for quality.
 
-## Submission Requirements
+## Two Ways to Contribute
 
-1. **SKILL.md** with proper frontmatter (name, description)
-2. Description includes trigger phrases and use cases
-3. Clear documentation with examples
-4. Apache 2.0 or MIT license
+### Option 1: External Skill (Recommended)
+
+Keep your skill in your own repo, we sync it automatically.
+
+**Benefits:**
+- You maintain full ownership and control
+- Updates sync automatically (daily)
+- Clear attribution preserved
+
+**Process:**
+
+1. Open an [issue](https://github.com/numman-ali/n-skills/issues) with:
+   - Your repo URL
+   - Path to skill folder (e.g., `skills/my-skill`)
+   - Brief description of what it does
+
+2. If approved, submit a PR adding your entry to `sources.yaml`:
+
+```yaml
+- name: your-skill
+  description: What it does and when to use it
+  source:
+    repo: your-username/your-repo
+    path: skills/your-skill   # Path within your repo
+    ref: main                 # Branch, tag, or commit
+  target:
+    category: tools           # tools, development, productivity, automation, data, documentation
+    path: skills/tools/your-skill
+  author:
+    name: Your Name
+    github: your-username
+  license: MIT
+  homepage: https://github.com/your-username/your-repo
+```
+
+3. Once merged, our sync workflow copies your skill folder daily.
+
+### Option 2: Native Skill
+
+Submit the skill directly to this repo.
+
+1. Fork this repository
+2. Add your skill to the appropriate category under `skills/`
+3. Add an entry to `sources.yaml` with `native: true`
+4. Open a PR
+
+---
 
 ## SKILL.md Format
+
+All skills must have a valid SKILL.md:
 
 ```yaml
 ---
@@ -26,13 +71,20 @@ description: |
 [Instructions here]
 ```
 
-## How to Submit
+See [docs/skill-format.md](docs/skill-format.md) for the complete specification.
 
-1. Fork this repository
-2. Add your skill to the appropriate category under `skills/`
-3. Update `.claude-plugin/marketplace.json` with your plugin entry
-4. Update `AGENTS.md` with your skill
-5. Open a PR with description of the skill
+## Skill Structure
+
+```
+your-skill/
+├── SKILL.md              # Required: Skill definition
+├── references/           # Optional: Supporting documentation
+│   └── api-docs.md
+├── scripts/              # Optional: Helper scripts
+│   └── helper.py
+└── assets/               # Optional: Templates, configs
+    └── template.json
+```
 
 ## Categories
 
@@ -47,17 +99,48 @@ description: |
 
 ## Quality Standards
 
+**Required:**
 - Clear, actionable instructions
 - Working examples
 - Proper error handling guidance
 - No hardcoded secrets
-- Documentation for any dependencies
+- Apache 2.0 or MIT license
+
+**Nice to have:**
+- Screenshots or demos
+- Multiple usage examples
+- Edge case handling
+- Integration tests
+
+## Sync Configuration
+
+For external skills, you can control what gets synced:
+
+```yaml
+sync:
+  include:              # Specific files/folders to copy
+    - SKILL.md
+    - references/
+    - scripts/
+  exclude:              # Patterns to skip (defaults below)
+    - node_modules/
+    - "*.lock"
+    - tmp/
+```
+
+If `include` is not specified, everything is copied except `exclude` patterns.
 
 ## Review Process
 
-1. Automated validation of SKILL.md format
-2. Manual review for quality and usefulness
-3. Security review for any scripts
-4. Merge upon approval
+1. **Issue triage** - We assess fit for the marketplace
+2. **Format validation** - SKILL.md structure checked
+3. **Manual review** - Quality and usefulness evaluated
+4. **Security review** - Scripts and dependencies audited
+5. **Merge** - Entry added, sync begins
 
 PRs are typically reviewed within 1-2 days.
+
+## Questions?
+
+- Open an [issue](https://github.com/numman-ali/n-skills/issues)
+- DM [@nummanali](https://x.com/nummanali) on X

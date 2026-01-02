@@ -100,9 +100,10 @@ $skill-installer https://github.com/numman-ali/n-skills/tree/main/skills/tools/z
 
 ## 📦 Available Skills
 
-| Skill | Category | Description |
-|:------|:---------|:------------|
-| **[zai-cli](./skills/tools/zai-cli/)** | `tools` | Z.AI vision, search, reader, and GitHub exploration via MCP |
+| Skill | Category | Source | Description |
+|:------|:---------|:-------|:------------|
+| **[zai-cli](./skills/tools/zai-cli/)** | `tools` | native | Z.AI vision, search, reader, and GitHub exploration via MCP |
+| **[dev-browser](./skills/automation/dev-browser/)** | `automation` | [SawyerHood](https://github.com/SawyerHood/dev-browser) | Browser automation with persistent page state |
 
 > More skills coming soon. Want to contribute? See [CONTRIBUTING.md](CONTRIBUTING.md)
 
@@ -164,25 +165,55 @@ n-skills works everywhere because we use open standards:
 
 ---
 
+## 🔄 Auto-Sync from Upstream
+
+External skills stay in sync with their source repos automatically.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│   Your Repo              n-skills                           │
+│   ────────              ────────                            │
+│   skills/my-skill/  ──►  skills/category/my-skill/         │
+│                                                             │
+│   Daily cron syncs your latest changes.                    │
+│   You maintain ownership. We curate the collection.        │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**How it works:**
+1. You maintain your skill in your own repo
+2. Add an entry to [`sources.yaml`](sources.yaml) via PR
+3. GitHub Actions syncs your skill folder daily
+4. Attribution preserved via `.source.json`
+
+**Why not submodules?** Submodule hell is real. This approach is simpler and works with openskills, Claude Code, and every other tool without special handling.
+
+---
+
 ## 📁 Repository Structure
 
 ```
 n-skills/
 ├── .claude-plugin/
-│   └── marketplace.json     # Claude Code registry
-├── AGENTS.md                # Universal discovery
+│   └── marketplace.json       # Claude Code registry
+├── .github/workflows/
+│   └── sync-skills.yml        # Daily sync automation
+├── scripts/
+│   ├── sync-external.mjs      # Sync engine
+│   └── update-registry.mjs    # Registry generator
+├── sources.yaml               # External skill manifest
+├── AGENTS.md                  # Universal discovery
 ├── skills/
 │   ├── tools/
-│   │   └── zai-cli/         # Flagship skill
-│   ├── development/
-│   ├── productivity/
-│   ├── automation/
-│   ├── data/
-│   └── documentation/
+│   │   └── zai-cli/           # Native skill
+│   └── automation/
+│       └── dev-browser/       # Synced from SawyerHood
 └── docs/
-    ├── skill-format.md      # How to write skills
-    ├── cross-platform.md    # Multi-agent compatibility
-    └── categories.md        # Category guidelines
+    ├── skill-format.md        # How to write skills
+    ├── cross-platform.md      # Multi-agent compatibility
+    └── categories.md          # Category guidelines
 ```
 
 ---
