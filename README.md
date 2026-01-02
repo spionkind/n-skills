@@ -1,17 +1,9 @@
-```
-                     _    _ _ _
-                    | |  (_) | |
-  _ __    ___  ___  | | ___| | |___
- | '_ \  / __|/ _ \ | |/ / | | / __|
- | | | | \__ \ (_) ||   <| | | \__ \
- |_| |_| |___/\___/ |_|\_\_|_|_|___/
-
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Curated Skills for AI Agents
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
-
 <div align="center">
+
+<img src="./assets/logo.svg" alt="n-skills" width="400"/>
+
+<br/>
+<br/>
 
 **Curated by [Numman Ali](https://x.com/nummanali)**
 
