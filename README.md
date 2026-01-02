@@ -13,13 +13,16 @@
 
 <div align="center">
 
+**Curated by [Numman Ali](https://x.com/nummanali)**
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/nummanali?style=social)](https://x.com/nummanali)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![agentskills.io](https://img.shields.io/badge/format-agentskills.io-purple.svg)](https://agentskills.io)
 [![AGENTS.md](https://img.shields.io/badge/discovery-AGENTS.md-green.svg)](https://www.infoq.com/news/2025/08/agents-md/)
 
 **One marketplace. Every agent. No bullshit.**
 
-[Install](#-quick-start) · [Skills](#-available-skills) · [Contribute](CONTRIBUTING.md) · [Philosophy](#-philosophy)
+[Install](#-quick-start) · [Skills](#-available-skills) · [Submit a Skill](#-want-to-be-featured) · [Philosophy](#-philosophy)
 
 </div>
 
@@ -152,16 +155,28 @@ n-skills/
 
 ---
 
-## 🤝 Contributing
+## 🎯 Want to be Featured?
 
-This is a **curated** marketplace. Quality over quantity.
+This is a **curated** marketplace. Anyone can request to be included, but only **high-quality, real value-add projects** will be considered.
 
-1. Fork this repo
-2. Add your skill to the appropriate category
-3. Update `marketplace.json` and `AGENTS.md`
-4. Open a PR
+**What we're looking for:**
+- Skills that solve real problems
+- Clean, well-documented code
+- Genuine utility for developers
+- Active maintenance
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
+**Not interested in:**
+- Wrapper skills with no real value
+- Abandoned or unmaintained projects
+- Low-effort submissions
+
+### How to Submit
+
+1. Open an [issue](https://github.com/numman-ali/n-skills/issues) with your skill details
+2. Explain what it does and why it's valuable
+3. If approved, submit a PR following [CONTRIBUTING.md](CONTRIBUTING.md)
+
+Or DM me on X: [@nummanali](https://x.com/nummanali)
 
 ---
 
