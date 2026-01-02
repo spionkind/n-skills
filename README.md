@@ -64,22 +64,37 @@ We don't fight the fragmentation. We transcend it:
 
 ## 🚀 Quick Start
 
-### Claude Code
+### Install via OpenSkills (Recommended)
+
+```bash
+npm i -g openskills
+openskills install numman-ali/n-skills
+openskills sync
+```
+
+That's it. Works with **every agent**: Claude Code, Cursor, Windsurf, Cline, Aider, and anything that reads AGENTS.md.
+
+> **New to OpenSkills?** It's the universal skills installer. [Learn more →](https://github.com/numman-ali/openskills)
+
+---
+
+<details>
+<summary><strong>Prefer native installation?</strong></summary>
+
+If you're adamant about using built-in methods:
+
+**Claude Code:**
 ```bash
 /plugin marketplace add numman-ali/n-skills
 /plugin install zai-cli@n-skills
 ```
 
-### OpenSkills (Universal)
-```bash
-openskills install numman-ali/n-skills
-```
-Works with: **Cursor** · **Windsurf** · **Cline** · **Aider** · any AGENTS.md-compatible agent
-
-### Codex
+**Codex:**
 ```bash
 $skill-installer https://github.com/numman-ali/n-skills/tree/main/skills/tools/zai-cli
 ```
+
+</details>
 
 ---
 
