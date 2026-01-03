@@ -197,7 +197,8 @@ The GitHub Actions workflow (`sync-skills.yml`) syncs external skills from upstr
 2. Computes SHA-256 content hash of each skill folder
 3. Compares with `content_hash` stored in `.source.json`
 4. Only syncs if content actually changed (not just new commits)
-5. Commits directly to main (no PR)
+5. Auto-bumps patch version in `package.json`, `package-lock.json`, and `marketplace.json`
+6. Commits directly to main (no PR)
 
 ### Critical rules
 

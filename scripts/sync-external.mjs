@@ -250,6 +250,54 @@ writeFileSync(SYNC_STATE_FILE, JSON.stringify(syncState, null, 2));
 // Cleanup
 rmSync(TEMP_DIR, { recursive: true });
 
+// Bump versions if there were changes
+if (hasChanges) {
+  // Bump package.json version
+  const PACKAGE_FILE = join(ROOT, "package.json");
+  let newVersion = null;
+  if (existsSync(PACKAGE_FILE)) {
+    try {
+      const pkg = JSON.parse(readFileSync(PACKAGE_FILE, "utf-8"));
+      if (pkg.version) {
+        const parts = pkg.version.split(".");
+        parts[2] = String(parseInt(parts[2] || "0", 10) + 1);
+        newVersion = parts.join(".");
+        pkg.version = newVersion;
+        writeFileSync(PACKAGE_FILE, JSON.stringify(pkg, null, 2) + "\n");
+        console.log(`\n📦 Bumped package.json version to ${newVersion}`);
+      }
+    } catch (e) {
+      console.warn("⚠️  Could not bump package.json version:", e.message);
+    }
+  }
+
+  // Update package-lock.json via npm install
+  if (newVersion) {
+    try {
+      execSync("npm install --package-lock-only", { cwd: ROOT, stdio: "pipe" });
+      console.log(`📦 Updated package-lock.json via npm install`);
+    } catch (e) {
+      console.warn("⚠️  Could not update package-lock.json:", e.message);
+    }
+  }
+
+  // Bump marketplace.json version (use same version as package.json)
+  const MARKETPLACE_FILE = join(ROOT, ".claude-plugin", "marketplace.json");
+  if (newVersion && existsSync(MARKETPLACE_FILE)) {
+    try {
+      const marketplace = JSON.parse(readFileSync(MARKETPLACE_FILE, "utf-8"));
+      if (marketplace.metadata) {
+        marketplace.metadata.version = newVersion;
+        marketplace.metadata.generated_at = new Date().toISOString();
+        writeFileSync(MARKETPLACE_FILE, JSON.stringify(marketplace, null, 2) + "\n");
+        console.log(`📦 Bumped marketplace.json version to ${newVersion}`);
+      }
+    } catch (e) {
+      console.warn("⚠️  Could not bump marketplace.json version:", e.message);
+    }
+  }
+}
+
 // Summary
 console.log("\n" + "=".repeat(50));
 console.log("📊 Sync Summary");
