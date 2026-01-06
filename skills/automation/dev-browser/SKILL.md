@@ -42,8 +42,7 @@ Connects to user's existing Chrome browser. Use this when:
 cd skills/dev-browser && npm i && npm run start-extension &
 ```
 
-Wait for `Waiting for extension to connect...`
-
+Wait for `Waiting for extension to connect...` followed by `Extension connected` in the console. To know that a client has connected and the browser is ready to be controlled.
 **Workflow:**
 
 1. Scripts call `client.page("name")` just like the normal mode to create new pages / connect to existing ones.
@@ -62,8 +61,8 @@ cd skills/dev-browser && npx tsx <<'EOF'
 import { connect, waitForPageLoad } from "@/client.js";
 
 const client = await connect();
-const page = await client.page("example"); // descriptive name like "cnn-homepage"
-await page.setViewportSize({ width: 1280, height: 800 });
+// Create page with custom viewport size (optional)
+const page = await client.page("example", { viewport: { width: 1920, height: 1080 } });
 
 await page.goto("https://example.com");
 await waitForPageLoad(page);
@@ -118,7 +117,11 @@ For scraping large datasets, intercept and replay network requests rather than s
 
 ```typescript
 const client = await connect();
-const page = await client.page("name"); // Get or create named page
+
+// Get or create named page (viewport only applies to new pages)
+const page = await client.page("name");
+const pageWithSize = await client.page("name", { viewport: { width: 1920, height: 1080 } });
+
 const pages = await client.list(); // List all page names
 await client.close("name"); // Close a page
 await client.disconnect(); // Disconnect (pages persist)

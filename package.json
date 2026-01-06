@@ -1,6 +1,6 @@
 {
   "name": "n-skills",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Curated plugin marketplace for AI coding agents",
   "private": true,
   "scripts": {

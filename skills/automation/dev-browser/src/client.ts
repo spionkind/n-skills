@@ -4,6 +4,7 @@ import type {
   GetPageResponse,
   ListPagesResponse,
   ServerInfoResponse,
+  ViewportSize,
 } from "./types";
 import { getSnapshotScript } from "./snapshot/browser-script";
 
@@ -213,8 +214,16 @@ export interface ServerInfo {
   extensionConnected?: boolean;
 }
 
+/**
+ * Options for creating or getting a page
+ */
+export interface PageOptions {
+  /** Viewport size for new pages */
+  viewport?: ViewportSize;
+}
+
 export interface DevBrowserClient {
-  page: (name: string) => Promise<Page>;
+  page: (name: string, options?: PageOptions) => Promise<Page>;
   list: () => Promise<string[]>;
   close: (name: string) => Promise<void>;
   disconnect: () => Promise<void>;
@@ -305,12 +314,12 @@ export async function connect(serverUrl = "http://localhost:9222"): Promise<DevB
   }
 
   // Helper to get a page by name (used by multiple methods)
-  async function getPage(name: string): Promise<Page> {
+  async function getPage(name: string, options?: PageOptions): Promise<Page> {
     // Request the page from server (creates if doesn't exist)
     const res = await fetch(`${serverUrl}/pages`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name } satisfies GetPageRequest),
+      body: JSON.stringify({ name, viewport: options?.viewport } satisfies GetPageRequest),
     });
 
     if (!res.ok) {
