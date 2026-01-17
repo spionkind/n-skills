@@ -171,28 +171,31 @@ for (const skill of sources.skills || []) {
       throw new Error(`SKILL.md not found in ${skill.source.path}`);
     }
 
-    // Clean target directory
-    if (existsSync(targetPath)) {
-      rmSync(targetPath, { recursive: true });
-    }
-    mkdirSync(dirname(targetPath), { recursive: true });
+    // New structure: skill content goes into skills/<skill-name>/ subfolder
+    // This matches official Claude Code plugin format
+    const skillSubfolder = join(targetPath, "skills", skill.name);
 
-    // Copy files
+    // Clean target skills subfolder (preserve .claude-plugin/ at plugin root)
+    if (existsSync(skillSubfolder)) {
+      rmSync(skillSubfolder, { recursive: true });
+    }
+    mkdirSync(skillSubfolder, { recursive: true });
+
+    // Copy files into the skills/<skill-name>/ subfolder
     const includes = syncConfig.include || null;
 
     if (includes) {
       // Copy specific files/folders
-      mkdirSync(targetPath, { recursive: true });
       for (const item of includes) {
         const src = join(sourcePath, item);
-        const dest = join(targetPath, item);
+        const dest = join(skillSubfolder, item);
         if (existsSync(src)) {
           cpSync(src, dest, { recursive: true });
         }
       }
     } else {
       // Copy everything except excludes
-      cpSync(sourcePath, targetPath, {
+      cpSync(sourcePath, skillSubfolder, {
         recursive: true,
         filter: (src) => {
           const relativePath = src.replace(sourcePath, "");
@@ -209,7 +212,7 @@ for (const skill of sources.skills || []) {
       });
     }
 
-    // Write attribution file with content hash
+    // Write attribution file at plugin root (not in skill subfolder)
     const attributionPath = join(targetPath, ".source.json");
     writeFileSync(
       attributionPath,

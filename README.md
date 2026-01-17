@@ -213,13 +213,23 @@ n-skills/
 ├── AGENTS.md                  # Universal discovery
 ├── skills/
 │   ├── automation/
-│   │   └── dev-browser/       # Synced from SawyerHood
+│   │   └── dev-browser/              # Synced from SawyerHood
+│   │       ├── .claude-plugin/
+│   │       └── skills/dev-browser/   # SKILL.md lives here
 │   ├── tools/
-│   │   ├── gastown/           # Native skill
-│   │   └── zai-cli/           # Native skill
+│   │   ├── gastown/
+│   │   │   ├── .claude-plugin/
+│   │   │   └── skills/gastown/
+│   │   └── zai-cli/
+│   │       ├── .claude-plugin/
+│   │       └── skills/zai-cli/
 │   └── workflow/
-│       ├── orchestration/            # Native skill - multi-agent coordination
-│       └── open-source-maintainer/   # Native skill - GitHub repo maintenance
+│       ├── orchestration/
+│       │   ├── .claude-plugin/
+│       │   └── skills/orchestration/
+│       └── open-source-maintainer/
+│           ├── .claude-plugin/
+│           └── skills/open-source-maintainer/
 └── docs/
     ├── skill-format.md        # How to write skills
     ├── cross-platform.md      # Multi-agent compatibility

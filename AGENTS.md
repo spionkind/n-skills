@@ -98,9 +98,16 @@ Each skill must be a **separate entry** in the `plugins` array in `.claude-plugi
 }
 ```
 
-**Each skill folder must contain:**
-1. `SKILL.md` — Skill content in agentskills.io format
-2. `.claude-plugin/plugin.json` — Plugin manifest for Claude Code
+**Plugin folder structure (matches official Claude Code format):**
+```
+skills/category/skill-name/
+├── .claude-plugin/
+│   └── plugin.json           # Plugin manifest
+└── skills/
+    └── skill-name/           # Skill subfolder (required!)
+        ├── SKILL.md          # Skill content
+        └── references/       # Optional supporting docs
+```
 
 **plugin.json template:**
 ```json
@@ -121,6 +128,7 @@ Each skill must be a **separate entry** in the `plugins` array in `.claude-plugi
 **Critical rules:**
 - Each skill is a separate plugin entry (NOT a nested `skills` array)
 - `source` points to the skill folder path
+- SKILL.md must be inside `skills/<skill-name>/` subfolder (Claude Code auto-discovery)
 - **NO `$schema` key** — triggers Claude Code impersonation validation error
 
 ---
